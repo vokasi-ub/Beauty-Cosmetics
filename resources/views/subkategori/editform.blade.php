@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
 
-	@foreach ($data as $row)
+	@foreach ($subkategori as $row)
 
     <!-- Main content -->
     <section class="content">
@@ -18,10 +18,12 @@
           </div>
         </div>
         <div class="box-body">
-				<div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-tags"></i> Id Kategori </span>
-                <input title="Id Kategori"type="text" name="id_kategori" autocomplete="off" required class="form-control" value="{{$row->id_kategori}}">
-				</div><br>
+				<select name="id_kategori" id='id_kategori' class="form-control">
+        <option value="">- select kategori </option>
+          @foreach ($kategori as $row2)
+            <option value="{{$row2->id_kategori}}" > {{$row2->nama_kategori}} </option>
+          @endforeach
+          </select><br>
 				
 		</div>
 		<div class="box-body">

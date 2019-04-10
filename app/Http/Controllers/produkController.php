@@ -31,8 +31,9 @@ class produkController extends Controller
         return view('produk.addform', compact('produk'));
     }
     public function editform($id){
-        $data = DB::table('produk')->where('id_produk',$id)->get();
-		return view('produk.editform', compact('data'));
+        $produk = DB::table('produk')->where('id_produk',$id)->get();
+        $subkategori = DB::table('subkategori')->get();
+		return view('produk.editform', compact('produk','subkategori'));
     }
 
     /**
@@ -54,12 +55,15 @@ class produkController extends Controller
      */
     public function store(Request $request)
     {
+        $file       = $request->file('gambar');
+        $fileName   = $file->getClientOriginalName();
+        $request->file('gambar')->move("image/", $fileName);
         //
         DB::table('produk')->insert([
             'id_subkategori' => $request->id_subkategori,
             'nama_produk' => $request->nama_produk,
             'stok' => $request->stok,
-            'image' => $request->image,
+            'image' => $fileName,
             'deskripsi' => $request->deskripsi,
             'harga' => $request->harga,
           ]);
@@ -98,12 +102,15 @@ class produkController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $file       = $request->file('gambar');
+        $fileName   = $file->getClientOriginalName();
+        $request->file('gambar')->move("image/", $fileName);
         //
         DB::table('produk')->where('id_produk',$id)->update([
             'id_subkategori' => $request->id_subkategori,
             'nama_produk' => $request->nama_produk,
             'stok' => $request->stok,
-            'image' => $request->image,
+            'image' => $fileName,
             'deskripsi' => $request->deskripsi,
             'harga' => $request->harga,
             ]);		

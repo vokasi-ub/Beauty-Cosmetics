@@ -41,7 +41,7 @@
         <div class="box-body">
 				<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-tags"></i> Image </span>
-                <input title="Image"type="text" name="image"  required class="form-control">
+                <input title="Image"type="file" name="gambar"  required class="form-control">
 				</div><br>
         </div>
 				

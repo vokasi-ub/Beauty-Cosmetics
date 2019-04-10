@@ -5,15 +5,9 @@
 
     <section class="content-header">
       <h1>
-        Simple Tables
-        <small>preview of simple tables</small>
+       Beauty Cosmetics
       </h1>
 </center>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Tables</a></li>
-        <li class="active">Simple</li>
-      </ol>
     </section>
 
     <!-- Main content -->

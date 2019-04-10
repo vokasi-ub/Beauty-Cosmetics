@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
 
-	@foreach ($data as $row)
+	@foreach ($produk as $row)
 
     <!-- Main content -->
     <section class="content">
@@ -18,10 +18,12 @@
           </div>
         </div>
         <div class="box-body">
-				<div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-tags"></i> Id SubKategori </span>
-                <input title="Id SubKategori"type="text" name="id_subkategori" autocomplete="off" required class="form-control" value="{{$row->id_subkategori}}">
-				</div><br>
+        <select name="id_subkategori" id='id_subkategori' class="form-control">
+        <option value="">- select produk </option>
+        @foreach ($subkategori as $row2)
+            <option value="{{$row2->id_subkategori}}" > {{$row2->nama_subkategori}} </option>
+          @endforeach
+          </select>
 				
 		</div>
 		<div class="box-body">
@@ -41,7 +43,7 @@
         <div class="box-body">
 				<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-tags"></i> Image </span>
-                <input title="Image"type="text" name="image" autocomplete="off" required class="form-control" value="{{$row->image}}">
+                <input title="Image"type="file" name="gambar" autocomplete="off" required class="form-control" value="/image/{{ $row->image }}">
 				</div><br>
 				
 		</div>

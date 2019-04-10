@@ -32,7 +32,8 @@ class SubKategoriController extends Controller
     }
     public function editform($id){
         $subkategori = DB::table('subkategori')->where('id_subkategori',$id)->get();
-		return view('subkategori.editform', compact('subkategori'));
+        $kategori = DB::table('kategori_cosmetics')->get();
+		return view('subkategori.editform', compact('subkategori','kategori'));
     }
 
     /**

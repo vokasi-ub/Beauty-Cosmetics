@@ -5,15 +5,9 @@
 
     <section class="content-header">
       <h1>
-        Simple Tables
-        <small>preview of simple tables</small>
+        Beauty Cosmetics
       </h1>
 </center>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Tables</a></li>
-        <li class="active">Simple</li>
-      </ol>
     </section>
 
     <!-- Main content -->
@@ -53,7 +47,7 @@
       <td>{{$row->id_subkategori}}</td>
       <td>{{$row->nama_produk}}</td>
       <td>{{$row->stok}}</td>
-      <td>{{$row->image}}</td>
+      <td><img src="/image/{{ $row->image }}" height="150px" width="150px" /></td>
       <td>{{$row->deskripsi}}</td>
       <td>{{$row->harga}}</td>
       <td><a href="editproduk/{{$row->id_produk}}">Edit</a> | <a href="hapusproduk/{{$row->id_produk}}" onClick="return confirm('Are you sure you want to delete?')

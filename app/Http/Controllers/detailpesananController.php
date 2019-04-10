@@ -31,8 +31,9 @@ class detailpesananController extends Controller
         return view('detailpesanan.addform', compact('detail_pesanan'));
     }
     public function editform($id){
-        $data = DB::table('detail_pesanan')->where('id_pesanan',$id)->get();
-		return view('detailpesanan.editform', compact('data'));
+        $detail_pesanan = DB::table('detail_pesanan')->where('id_pesanan',$id)->get();
+        $produk = DB::table('produk')->get();
+		return view('detailpesanan.editform', compact('detail_pesanan','produk'));
     }
 
     /**
@@ -102,7 +103,7 @@ class detailpesananController extends Controller
         //
         DB::table('detail_pesanan')->where('id_pesanan',$id)->update([
             
-            'id_produk' => $request->id_produk,
+            'id_produk' => $request->id_pesanan,
             'nama_kategori' => $request->nama_kategori,
             'nama' => $request->nama,
             'alamat' => $request->alamat,
@@ -110,7 +111,7 @@ class detailpesananController extends Controller
             'jumlah_pesanan' => $request->jumlah_pesanan,
             'total_harga' => $request->total_harga,
             ]);		
-            return redirect('detailpesanan');
+            return redirect()->route('detailpesanan.index');
     }
 
     /**

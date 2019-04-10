@@ -3,7 +3,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="{{ asset('tema/dist/img/IMG_9584.jpg') }}" class="img-circle" alt="User Image">
+          <img src="{{ asset('tema/dist/img/20190406_135535_0001.png') }}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>Husnul Khotimah</p>
@@ -13,7 +13,7 @@
       
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MAIN NAVIGATION</li>
+        <li class="header">daftar menu</li>
 		
 		<li class="active">
           <a href="{{url('dashboard2')}}">
