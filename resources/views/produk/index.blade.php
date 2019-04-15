@@ -41,10 +41,10 @@
   <th>Harga</th>
   </tr>
   <?php $no=1 ?>
-  @foreach($produk as $row)
+  @foreach($produk as $key=>$row)
     <tr>
     <td> <center>{{$no++}} </center> </td>
-      <td>{{$row->id_subkategori}}</td>
+      <td>{{$row->subkategoriModel->nama_subkategori}}</td>
       <td>{{$row->nama_produk}}</td>
       <td>{{$row->stok}}</td>
       <td><img src="/image/{{ $row->image }}" height="150px" width="150px" /></td>

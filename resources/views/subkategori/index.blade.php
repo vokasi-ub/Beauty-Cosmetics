@@ -37,10 +37,10 @@
   <th>Nama SubKategori</th>
   </tr>
   <?php $no=1 ?>
-  @foreach($subkategori as $row)
+  @foreach($subkategori as $key=>$row)
     <tr>
     <td> <center>{{$no++}} </center> </td>
-    <td>{{$row->id_kategori}}</td>
+    <td>{{$row->kategoriModel->nama_kategori}}</td>
       <td>{{$row->nama_subkategori}}</td>
       <td><a href="editsubKategori/{{$row->id_subkategori}}">Edit</a> | <a href="hapussubKategori/{{$row->id_subkategori}}" onClick="return confirm('Are you sure you want to delete?')
 									" class="btn default"><i class="fa fa-trash-o"></i> Hapus</a></td>

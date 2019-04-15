@@ -40,7 +40,8 @@
     <tr>
     <td> <center>{{$no++}} </center> </td>
       <td>{{$kategori_cosmetics->nama_kategori}}</td>
-      <td><a href="editKategori/{{$kategori_cosmetics->id_kategori}}">Edit</a> | <a href="hapusKategori/{{$kategori_cosmetics->id_kategori}}" onClick="return confirm('Are you sure you want to delete?')
+      <td><a href="editKategori/{{$kategori_cosmetics->id_kategori}}" > Edit</a> | 
+                  <a href="hapusKategori/{{$kategori_cosmetics->id_kategori}}" onClick="return confirm('Are you sure you want to delete?')
 									" class="btn default"><i class="fa fa-trash-o"></i> Hapus</a></td>
     </tr>
   @endforeach

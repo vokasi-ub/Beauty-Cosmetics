@@ -17,11 +17,9 @@ class CreateDetailPesananTable extends Migration
             $table->bigIncrements('id_pesanan');
             $table->unsignedBigInteger('id_produk');
             $table->foreign('id_produk')->references('id_produk')->on('produk')->onDelete('cascade');
-            $table->string('nama_kategori',25);
             $table->string('nama',255);
             $table->string('alamat',255);
             $table->timestamp('tanggal_pemesanan',5);
-            $table->string('jumlah_pesanan',50);
             $table->string('total_harga',50);
             $table->timestamps();
         });

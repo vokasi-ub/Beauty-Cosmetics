@@ -24,8 +24,8 @@ Route::get('/lihatdata','crud@index')->name('lihatdata');
 Route::get('tambahdata','KategoriController@addform');
 Route::post('tambahkategori','KategoriController@store');
 Route::get('hapusKategori/{id}','KategoriController@destroy');
-Route::get('editKategori/{id}','KategoriController@editform');
-Route::post('updateKategori/{id}','KategoriController@update');
+Route::get('editKategori/{id_kategori}','KategoriController@editform');
+Route::post('updateKategori/{id_kategori}','KategoriController@update');
 
 
 Route::resource('detailpesanan','detailpesananController');
@@ -41,16 +41,16 @@ Route::get('/lihatdata','crud@index')->name('lihatdata');
 Route::get('tambahsubdata','SubKategoriController@addform');
 Route::post('tambahsubkategori','SubKategoriController@store');
 Route::get('hapussubKategori/{id}','SubKategoriController@destroy');
-Route::get('editsubKategori/{id}','SubKategoriController@editform');
-Route::post('updatesubKategori/{id}','SubKategoriController@update');
+Route::get('editsubKategori/{id_subkategori}','SubKategoriController@editform');
+Route::post('updatesubKategori/{id_subkategori}','SubKategoriController@update');
 
 Route::resource('produk','produkController');
 Route::get('/lihatdata','crud@index')->name('lihatdata');
 Route::get('tambahprodukdata','produkController@addform');
 Route::post('tambahproduk','produkController@store');
 Route::get('hapusproduk/{id}','produkController@destroy');
-Route::get('editproduk/{id}','produkController@editform');
-Route::post('updateproduk/{id}','produkController@update');
+Route::get('editproduk/{id_produk}','produkController@editform');
+Route::post('updateproduk/{id_produk}','produkController@update');
 
 
 Route::get('master', function () {

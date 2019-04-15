@@ -15,7 +15,7 @@ class CreateKategoriCosmeticsTable extends Migration
     {
         Schema::create('kategori_cosmetics', function (Blueprint $table) {
             $table->bigIncrements('id_kategori');
-            $table->string('nama_kategori',20);
+            $table->string('nama_kategori')->unique();
             $table->timestamps();
         });
     }

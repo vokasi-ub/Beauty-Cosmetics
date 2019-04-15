@@ -19,7 +19,7 @@
         </div>
         <select name="id_subkategori" id='id_subkategori' class="form-control">
         <option value="">- select produk </option>
-          @foreach ($produk as $row)
+          @foreach ($data as $row)
             <option value="{{$row->id_subkategori}}" > {{$row->nama_subkategori}} </option>
           @endforeach
           </select>
@@ -28,35 +28,35 @@
 				<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-tags"></i> Nama Produk </span>
                 <input title="Nama Produk"type="text" name="nama_produk"  required class="form-control">
-				</div><br>
+				</div>
         </div>
 
         <div class="box-body">
 				<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-tags"></i> Stok </span>
                 <input title="Stok"type="text" name="stok"  required class="form-control">
-				</div><br>
+				</div>
         </div>
 
         <div class="box-body">
 				<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-tags"></i> Image </span>
                 <input title="Image"type="file" name="gambar"  required class="form-control">
-				</div><br>
+				</div>
         </div>
 				
         <div class="box-body">
 				<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-tags"></i> Deskripsi </span>
                 <input title="Deskripsi"type="text" name="deskripsi"  required class="form-control">
-				</div><br>
+				</div>
         </div>
 
         <div class="box-body">
 				<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-tags"></i> Harga </span>
                 <input title="Harga"type="text" name="harga"  required class="form-control">
-				</div><br>
+				</div>
 		</div>
     
         <div class="box-footer">

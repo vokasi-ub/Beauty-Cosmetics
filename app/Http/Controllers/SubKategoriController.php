@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\subkategoriModel;
+use App\kategoriModel;
 
 class SubKategoriController extends Controller
 {
@@ -19,21 +20,26 @@ class SubKategoriController extends Controller
          //mendenifisikan kata kuci
          $cari = $request->cari;
          //mencari data di database
-         $subkategori = DB::table('subkategori')
-         ->where('nama_subkategori','like',"%".$cari."%")
-         ->paginate();
+         $subkategori = subkategoriModel::with(['kategoriModel', 'produkModel'])
+         ->when($request->keyword, function ($query) use ($request) {
+            $query->where('nama_subkategori', 'like', "%{$request->keyword}%");
+                // ->orWhere('name', 'like', "%{$request->keyword}%");
+        })->get();
          //return data ke view
-         return view('subkategori.index',['subkategori' => $subkategori]);
+         return view('subkategori.index', compact('subkategori'));
     }
 
     public function addform(){
-        $subkategori = DB::table('kategori_cosmetics')->get();
-        return view('subkategori.addform', compact('subkategori'));
+        $subkategori = subkategoriModel::with(['kategoriModel', 'produkModel'])->get();
+        $data = kategoriModel::all();
+        return view('subkategori.addform', compact('subkategori', 'data'));
     }
-    public function editform($id){
-        $subkategori = DB::table('subkategori')->where('id_subkategori',$id)->get();
-        $kategori = DB::table('kategori_cosmetics')->get();
-		return view('subkategori.editform', compact('subkategori','kategori'));
+    public function editform($id_subkategori){
+        $subkategori = subkategoriModel::all();
+        $kategori = kategoriModel::all();
+        $data=subkategoriModel::where('id_subkategori',$id_subkategori)->get();
+        
+		return view('subkategori.editform', compact('subkategori','kategori','data'));
     }
 
     /**
@@ -56,8 +62,10 @@ class SubKategoriController extends Controller
     public function store(Request $request)
     {
         //
-        DB::table('subkategori')->insert(['id_kategori' => $request->id_kategori,
+        $data = subkategoriModel::with(['kategoriModel','produkModel'])
+		->insert(['id_kategori' => $request-> id_kategori,
         'nama_subkategori' => $request->nama_subkategori]);
+		
         return redirect()->route('subkategori.index');
     }
 
@@ -90,13 +98,13 @@ class SubKategoriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
-        DB::table('subkategori')->where('id_subkategori',$id)->update([
-            'id_kategori' => $request->id_kategori,
-            'nama_subkategori' => $request->nama_subkategori,
-            ]);		
+        $data = subkategoriModel::find($request->id_subkategori);
+        $data->id_kategori = $request->id_kategori;
+        $data ->nama_subkategori = $request->nama_subkategori;
+        $data->save();	
             return redirect('subkategori');
     }
 
@@ -109,7 +117,8 @@ class SubKategoriController extends Controller
     public function destroy($id)
     {
         //
-        DB::table('subkategori')->where('id_subkategori',$id)->delete();
+        $data=subkategoriModel::find($id);
+        $data->delete();
 		return redirect('subkategori');
     }
 }

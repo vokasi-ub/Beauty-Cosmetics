@@ -19,9 +19,7 @@ class KategoriController extends Controller
          //mendenifisikan kata kuci
          $cari = $request->cari;
          //mencari data di database
-         $kategori_cosmetics = DB::table('kategori_cosmetics')
-         ->where('nama_kategori','like',"%".$cari."%")
-         ->paginate();
+         $kategori_cosmetics = KategoriModel::where('nama_kategori', 'LIKE', '%' . $cari . '%')->paginate(10);
          //return data ke view
          return view('kategoricosmetics.index',['kategori_cosmetics' => $kategori_cosmetics]);
     }
@@ -29,8 +27,8 @@ class KategoriController extends Controller
     public function addform(){
         return view('kategoricosmetics.addform');
     }
-    public function editform($id){
-        $data = DB::table('kategori_cosmetics')->where('id_kategori',$id)->get();
+    public function editform($id_kategori){
+        $data = KategoriModel::find($id_kategori);
 		return view('kategoricosmetics.editform', compact('data'));
     }
 
@@ -54,10 +52,10 @@ class KategoriController extends Controller
     public function store(Request $request)
     {
         //
-        DB::table('kategori_cosmetics')->insert([
+        $data = new kategoriModel([
             'nama_kategori' => $request->nama_kategori,
           ]);
-
+            $data->save();
          return redirect('kategoricosmetics');
     }
 
@@ -90,12 +88,12 @@ class KategoriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
-        DB::table('kategori_cosmetics')->where('id_kategori',$id)->update([
-            'nama_kategori' => $request->nama_kategori,
-            ]);		
+            $data = kategoriModel::find($request->id_kategori);
+            $data->nama_kategori = $request->nama_kategori;
+            $data->save();		
             return redirect('kategoricosmetics');
     }
 
@@ -108,7 +106,8 @@ class KategoriController extends Controller
     public function destroy($id)
     {
         //
-        DB::table('kategori_cosmetics')->where('id_kategori',$id)->delete();
+        $data = kategoriModel::find($id);
+        $data->delete();
 		return redirect('kategoricosmetics');
     }
 }

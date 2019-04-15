@@ -19,21 +19,23 @@ class detailpesananController extends Controller
          //mendenifisikan kata kuci
          $cari = $request->cari;
          //mencari data di database
-         $detail_pesanan = DB::table('detail_pesanan')
-         ->where('id_produk','like',"%".$cari."%")
-         ->paginate();
+         //$detail_pesanan = DB::table('detail_pesanan')
+         $detailpesanan = detailpesananModel::with(['produkModel'])
+         ->when($request->keyword, function ($query) use ($request) {
+            $query->where('nama', 'like', "%{$request->keyword}%");
          //return data ke view
-         return view('detailpesanan.index',['detail_pesanan' => $detail_pesanan]);
+        })->get();
+         return view('detailpesanan.index', compact('detailpesanan'));
     }
 
     public function addform(){
-        $detail_pesanan = DB::table('produk')->get();
-        return view('detailpesanan.addform', compact('detail_pesanan'));
+        $detailpesanan = detailpesananModel::with(['produkModel'])->get();
+        return view('detailpesanan.addform', compact('detailpesanan'));
     }
-    public function editform($id){
-        $detail_pesanan = DB::table('detail_pesanan')->where('id_pesanan',$id)->get();
-        $produk = DB::table('produk')->get();
-		return view('detailpesanan.editform', compact('detail_pesanan','produk'));
+    public function editform($id_pesanan){
+        $detailpesanan = detailpesananModel::all();
+        $data = detailpesananModel::where('id_pesanan',$id_pesanan)->get();
+		return view('detailpesanan.editform', compact('detailpesanan','data'));
     }
 
     /**
@@ -56,13 +58,12 @@ class detailpesananController extends Controller
     public function store(Request $request)
     {
         //
-        DB::table('detail_pesanan')->insert([
+        //DB::table('detail_pesanan')->insert([
+        $data = detailpesananModel::with(['produkModel'])->insert([
             'id_produk' => $request->id_pesanan,
-            'nama_kategori' => $request->nama_kategori,
             'nama' => $request->nama,
             'alamat' => $request->alamat,
             'tanggal_pemesanan' => $request->tanggal_pemesanan,
-            'jumlah_pesanan' => $request->jumlah_pesanan,
             'total_harga' => $request->total_harga,
           ]);
 
@@ -101,14 +102,12 @@ class detailpesananController extends Controller
     public function update(Request $request, $id)
     {
         //
-        DB::table('detail_pesanan')->where('id_pesanan',$id)->update([
-            
+        //DB::table('detail_pesanan')->where('id_pesanan',$id)->update([
+        detailpesananModel::where('id_pesanan',$id)->update([  
             'id_produk' => $request->id_pesanan,
-            'nama_kategori' => $request->nama_kategori,
             'nama' => $request->nama,
             'alamat' => $request->alamat,
             'tanggal_pemesanan' => $request->tanggal_pemesanan,
-            'jumlah_pesanan' => $request->jumlah_pesanan,
             'total_harga' => $request->total_harga,
             ]);		
             return redirect()->route('detailpesanan.index');
@@ -123,7 +122,8 @@ class detailpesananController extends Controller
     public function destroy($id)
     {
         //
-        DB::table('detail_pesanan')->where('id_pesanan',$id)->delete();
+        $data=detailpesananModel::find($id);
+        $data->delete();
 		return redirect('detailpesanan');
     }
 }

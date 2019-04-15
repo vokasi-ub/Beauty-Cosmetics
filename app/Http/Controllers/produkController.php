@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\produkModel;
+use App\subkategoriModel;
 
 class produkController extends Controller
 {
@@ -19,21 +20,24 @@ class produkController extends Controller
          //mendenifisikan kata kuci
          $cari = $request->cari;
          //mencari data di database
-         $produk = DB::table('produk')
-         ->where('id_subkategori','like',"%".$cari."%")
-         ->paginate();
-         //return data ke view
-         return view('produk.index',['produk' => $produk]);
+         $produk = produkModel::with(['subkategoriModel','detailpesananModel'])
+         ->when($request->keyword, function ($query) use ($request) {
+            $query->where('nama_produk', 'like', "%{$request->keyword}%");
+                // ->orWhere('name', 'like', "%{$request->keyword}%");
+        })->get();
+         return view('produk.index', compact('produk'));
     }
 
     public function addform(){
-        $produk = DB::table('subkategori')->get();
-        return view('produk.addform', compact('produk'));
+        $produk = produkModel::with(['subkategoriModel','detailpesananModel'])->get();
+        $data = subkategoriModel::all();
+        return view('produk.addform', compact('produk', 'data'));
     }
-    public function editform($id){
-        $produk = DB::table('produk')->where('id_produk',$id)->get();
-        $subkategori = DB::table('subkategori')->get();
-		return view('produk.editform', compact('produk','subkategori'));
+    public function editform($id_produk){
+        $produk = produkModel::all();
+        $subkategori = subkategoriModel::all();
+        $data = produkModel::where('id_produk',$id_produk)->get();
+		return view('produk.editform', compact('produk','subkategori','data'));
     }
 
     /**
@@ -59,7 +63,7 @@ class produkController extends Controller
         $fileName   = $file->getClientOriginalName();
         $request->file('gambar')->move("image/", $fileName);
         //
-        DB::table('produk')->insert([
+        $data = produkModel::with(['subkategoriModel','detailpesananModel'])->insert([
             'id_subkategori' => $request->id_subkategori,
             'nama_produk' => $request->nama_produk,
             'stok' => $request->stok,
@@ -102,11 +106,15 @@ class produkController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        //
+        if(!empty($request->file('gambar'))){
+
         $file       = $request->file('gambar');
         $fileName   = $file->getClientOriginalName();
         $request->file('gambar')->move("image/", $fileName);
         //
-        DB::table('produk')->where('id_produk',$id)->update([
+        produkModel::where('id_produk',$id)->update([
             'id_subkategori' => $request->id_subkategori,
             'nama_produk' => $request->nama_produk,
             'stok' => $request->stok,
@@ -114,6 +122,16 @@ class produkController extends Controller
             'deskripsi' => $request->deskripsi,
             'harga' => $request->harga,
             ]);		
+        }else{
+            produkModel::where('id_produk',$id)->update([
+                'id_subkategori' => $request->id_subkategori,
+                'nama_produk' => $request->nama_produk,
+                'stok' => $request->stok,
+                'deskripsi' => $request->deskripsi,
+                'harga' => $request->harga,
+                ]);		
+
+        }
             return redirect('produk');
     }
 
@@ -126,7 +144,8 @@ class produkController extends Controller
     public function destroy($id)
     {
         //
-        DB::table('produk')->where('id_produk',$id)->delete();
+        $data=produkModel::find($id);
+        $data->delete();
 		return redirect('produk');
     }
 }

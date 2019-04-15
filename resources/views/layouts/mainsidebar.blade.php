@@ -49,7 +49,7 @@
 		
 		<li class="active">
           <a href="{{url('detailpesanan')}}">
-            <i class="fa fa-dashboard"></i> <span>Detail Pesanan</span>
+            <i class="fa fa-dashboard"></i> <span>Daftar Pesanan</span>
             
           </a>
         </li>

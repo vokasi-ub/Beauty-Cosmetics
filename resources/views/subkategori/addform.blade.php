@@ -22,17 +22,15 @@
 		<div class="box-body">
     <select name="id_kategori" id='id_kategori' class="form-control">
         <option value="">- select kategori </option>
-          @foreach ($subkategori as $row)
+          @foreach ($data as $row)
             <option value="{{$row->id_kategori}}" > {{$row->nama_kategori}} </option>
           @endforeach
-          </select><br>
+          </select>
 				<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-tags"></i> Nama Subkategori </span>
                 <input title="Nama Subkategori"type="text" name="nama_subkategori"  required class="form-control">
-				</div><br>
-				
-        
-		</div>
+				</div>
+				</div>
         <div class="box-footer">
 							<div class="col-md-offset-10 col-md-9">
 								

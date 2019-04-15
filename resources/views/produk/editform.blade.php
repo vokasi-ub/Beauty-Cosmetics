@@ -19,9 +19,13 @@
         </div>
         <div class="box-body">
         <select name="id_subkategori" id='id_subkategori' class="form-control">
-        <option value="">- select produk </option>
+        <option value="">- select Sub Kategori </option>
         @foreach ($subkategori as $row2)
-            <option value="{{$row2->id_subkategori}}" > {{$row2->nama_subkategori}} </option>
+        @if($row2->id_subkategori == $row->id_subkategori)
+            <option selected value="{{$row2->id_subkategori}}" > {{$row2->nama_subkategori}} </option>
+        @else
+        <option  value="{{$row2->id_subkategori}}" > {{$row2->nama_subkategori}} </option>
+            @endif
           @endforeach
           </select>
 				
@@ -30,35 +34,35 @@
 				<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-tags"></i> Nama produk </span>
                 <input title="Nama Produk"type="text" name="nama_produk" autocomplete="off" required class="form-control" value="{{$row->nama_produk}}">
-				</div><br>
+				</div>
 				
 		</div>
         <div class="box-body">
 				<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-tags"></i> Stok </span>
                 <input title="Stok"type="text" name="stok" autocomplete="off" required class="form-control" value="{{$row->stok}}">
-				</div><br>
+				</div>
 				
 		</div>
         <div class="box-body">
 				<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-tags"></i> Image </span>
-                <input title="Image"type="file" name="gambar" autocomplete="off" required class="form-control" value="/image/{{ $row->image }}">
-				</div><br>
+                <input title="Image"type="file" name="gambar" autocomplete="off"  class="form-control" value="/image/{{ $row->image }}">
+				</div>
 				
 		</div>
         <div class="box-body">
 				<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-tags"></i> Deskripsi </span>
                 <input title="Deskripsi"type="text" name="deskripsi" autocomplete="off" required class="form-control" value="{{$row->deskripsi}}">
-				</div><br>
+				</div>
 				
 		</div>
         <div class="box-body">
 				<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-tags"></i> Harga </span>
                 <input title="Harga"type="text" name="harga" autocomplete="off" required class="form-control" value="{{$row->harga}}">
-				</div><br>
+				</div>
 				
 		</div>
 

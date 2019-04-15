@@ -19,51 +19,35 @@
         </div>
         <select name="id_pesanan" id='id_pesanan' class="form-control">
         <option value="">- select produk </option>
-          @foreach ($detail_pesanan as $row)
+          @foreach ($detailpesanan as $row)
             <option value="{{$row->id_produk}}" > {{$row->nama_produk}} </option>
           @endforeach
           </select>
-        <div class="box-body">
-				<div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-tags"></i> Nama Kategori </span>
-                <input title="Nama Kategori"type="text" name="nama_kategori"  required class="form-control">
-				</div><br>
-				
-		</div>
-        <div class="box-body">
+        
 				<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-tags"></i> Nama </span>
                 <input title="Nama "type="text" name="nama"  required class="form-control">
-				</div><br>
+				</div>
 				
-		</div>
-        <div class="box-body">
+
+       
 				<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-tags"></i> Alamat </span>
                 <input title="Alamat"type="text" name="alamat"  required class="form-control">
-				</div><br>
+				</div>
 				
-		</div>
+
         <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-list-alt"></i> Tanggal pemesanan</span>
                 <input title="Tanggal Pemesanan"type="date" name="tanggal_pemesanan" autocomplete="off" required class="form-control">
 				</div>
-
-        
-        <div class="box-body">
-				<div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-tags"></i> Jumlah Pesanan </span>
-                <input title="Jumlah Pesanan"type="text" name="jumlah_pesanan"  required class="form-control">
-				</div><br>
 				
-		</div>
-        <div class="box-body">
 				<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-tags"></i> Total harga </span>
                 <input title="Total Harga"type="text" name="total_harga"  required class="form-control">
-				</div><br>
+				</div>
 				
-		</div>
+
         
                 
         <div class="box-footer">

@@ -8,11 +8,12 @@ class KategoriModel extends Model
 {
     //
     protected $table = 'kategori_cosmetics';
-    protected $fillabel = ['id_kategori','nama_kategori'];
-    protected $timestamps = true;
+    protected $fillable = ['id_kategori','nama_kategori'];
+    protected $primaryKey = 'id_kategori';
+    public $timestamps = true;
 
     public function subkategoriModel(){
-        return $this->hasMany(subkategoriModel::class);
+        return $this->hasMany(subkategoriModel::class,'id_kategori','id_kategori');
     }
 
 }

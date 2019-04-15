@@ -16,7 +16,7 @@
         <div class="col-md-12">
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Daftar Detail Pesanan</h3> 
+              <h3 class="box-title">Daftar Pesanan</h3> 
               <h4><a href="{{url('tambahpesanandata')}}">Add data</a></h4>
             </div>
             <form action="#" method="get" class="sidebar-form">
@@ -34,23 +34,19 @@
          <tr>
   <th>Id Pesanan</th>
   <th>Id Produk</th>
-  <th>Nama Kategori</th>
   <th>Nama </th>
   <th>Alamat</th>
   <th>Tanggal Pemesanan</th>
-  <th>Jumlah Pesanan</th>
   <th>Total harga</th>
   </tr>
   <?php $no=1 ?>
-  @foreach($detail_pesanan as $row)
+  @foreach($detailpesanan as $row)
     <tr>
     <td> <center>{{$no++}} </center> </td>
       <td>{{$row->id_produk}}</td>
-      <td>{{$row->nama_kategori}}</td>
       <td>{{$row->nama}}</td>
       <td>{{$row->alamat}}</td>
       <td>{{$row->tanggal_pemesanan}}</td>
-      <td>{{$row->jumlah_pesanan}}</td>
       <td>{{$row->total_harga}}</td>
       
 
